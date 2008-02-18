@@ -1,8 +1,8 @@
---- #YAML:1.0
+---
 name: Algorithm-TokenBucket
 version: 0.2
 author:
-  - Alex Kapranoff, E<lt>kappa@rambler-co.ruE<gt>
+  - 'Alex Kapranoff, E<lt>kappa@rambler-co.ruE<gt>'
 abstract: Token bucket rate limiting algorithm
 license: artistic
 build_requires:
