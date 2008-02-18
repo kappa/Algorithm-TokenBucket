@@ -4,7 +4,7 @@ use strict;
 # $from-Id: bucket.t,v 1.1 2004/10/27 14:38:00 kappa Exp $
 
 use Test::NoWarnings;
-use Test::More tests => 20;
+use Test::More tests => 24;
 
 use Time::HiRes qw/sleep time/;
 
@@ -48,3 +48,8 @@ isa_ok($bucket1, 'Algorithm::TokenBucket');
 ok(!$bucket1->conform(1), 'restored bucket is almost empty');
 sleep 0.1;
 ok($bucket1->conform(2), 'restored bucket works');
+
+is($bucket1->until(1), 0, 'no wait time for 1');
+cmp_ok(my $t = $bucket1->until(500), '>=', 5, 'wait time');
+cmp_ok(my $t2 = $bucket1->until(1000), '>=', $t, 'bigger wait time for a bigger number');
+cmp_ok( ( ( $t2 - $t ) - ( 500 / 25 ) ), '<=', 1, 'until() is sort of accurate');

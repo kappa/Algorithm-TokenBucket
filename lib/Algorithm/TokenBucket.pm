@@ -1,9 +1,8 @@
 package Algorithm::TokenBucket;
-# $Id: TokenBucket.pm,v 1.2 2004/10/27 15:04:59 kappa Exp $
 
 use 5.006;
 
-our $VERSION = 0.2;
+our $VERSION = 0.21;
 
 use warnings;
 use strict;
@@ -163,6 +162,27 @@ sub count {
     ($self->{_tokens} -= $size) < 0 and $self->{_tokens} = 0;
 }
 
+=item until($)
+
+This sub returns the number of seconds until I<N> tokens can be removed from the bucket.
+
+=cut
+
+sub until {
+    my Algorithm::TokenBucket $self = shift;
+    my $size = shift;
+
+    $self->_token_flow;
+
+    if ( $self->{_tokens} >= $size ) {
+        # can conform() right now
+        return 0;
+    } else {
+        my $needed = $size - $self->{_tokens};
+        return ( $needed / $self->{info_rate} );
+    }
+}
+
 1;
 __END__
 
@@ -194,6 +214,10 @@ Works unreliably for fractional rates unless Time::HiRes is present.
 
 Documentation lacks the actual algorithm description. See links or read
 the source (there are about 20 lines of sparse perl in several subs, trust me).
+
+=head1 ACKNOWLEDGMENTS
+
+Yuval Kogman contributed the L<until()> method.
 
 =head1 AUTHOR
 
