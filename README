@@ -1,0 +1,28 @@
+Algorithm::TokenBucket version 0.2
+===============================
+
+Token bucket algorithm is a flexible way of imposing a rate limit
+against a stream of items. It is also very easy to combine several
+rate-limiters in an C<AND> or C<OR> fashion.
+
+Each bucket has a memory footprint of constant size because the
+algorithm is based on statistics. This was my main motivation to
+implement it. Other rate limiters on CPAN (Schedule::RateLimit
+and Algorithm::FloodControl) keep track of I<ALL> incoming
+events in memory and are able therefore to be strictly exact.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Build.PL
+   perl Build
+   perl Build test
+   perl Build install
+
+COPYRIGHT AND LICENCE
+
+Licensed under Artistic license.
+
+Copyright (C) 2004 Alex Kapranoff <kappa@rambler-co.ru>
+

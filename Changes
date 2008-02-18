@@ -1,0 +1,5 @@
+Revision history for Perl extension Algorithm::TokenBucket.
+
+0.2  Wed, 27 October 2004 20:59 (MSD)
+	- Original version, written, podified and cpanified in 5
+	  hours.
