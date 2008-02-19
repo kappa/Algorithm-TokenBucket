@@ -2,7 +2,7 @@ package Algorithm::TokenBucket;
 
 use 5.006;
 
-our $VERSION = 0.31;
+our $VERSION = 0.32;
 
 use warnings;
 use strict;
@@ -117,7 +117,7 @@ sub state {
     return @$self{qw/info_rate burst_size _tokens _last_check_time/};
 }
 
-use constant PACK_FORMAT => "d4";
+use constant PACK_FORMAT => "d4";   # "F4" is not 5.6 compatible
 
 sub STORABLE_freeze {
     my ( $self, $cloning ) = @_;
