@@ -179,6 +179,13 @@ sub count {
 =item until($)
 
 This sub returns the number of seconds until I<N> tokens can be removed from the bucket.
+It's especially useful in multitasking environments like POE where you
+cannot busy-wait. One can safely schedule the next conform($N) check in until($N)
+seconds instead of checking repeatedly.
+
+Note that until() does not take into account C<burst size>. That means
+a bucket will not conform to I<N> even after sleeping for until($N)
+seconds if I<N> is greater than C<burst size>.
 
 =cut
 
@@ -221,6 +228,21 @@ Go, go, go!
         $mail->take_off;
         $rl1->count(1); $rl2->count(1);
     }
+
+Now, let's fix the CPU-hogging example from L</SYNOPSIS> using
+L</until()> method.
+
+    my $bucket = new Algorithm::TokenBucket 100 / 3600, 5;
+    my $time = Time::HiRes::time;
+    while (Time::HiRes::time - $time < 7200) {  # two hours
+        # be bursty
+        Time::HiRes::sleep $bucket->until(5);
+        if ($bucket->conform(5)) {  # should always be true
+            process(5);
+            $bucket->count(5);
+        }
+    }
+    # we're likely to have processed 200 items (without hogging the CPU)
 
 =head1 BUGS
 
