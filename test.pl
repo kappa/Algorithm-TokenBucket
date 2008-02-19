@@ -35,7 +35,7 @@ while (time - $time < 2) {
         $traffic--;
     }
 }
-cmp_ok($traffic, '>', 0, '50 or less in 2 seconds');
+cmp_ok($traffic, '>=', 0, '50 or less in 2 seconds');
 
 $bucket = new Algorithm::TokenBucket 25/1, 4; # start afresh
 
