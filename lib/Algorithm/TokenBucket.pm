@@ -2,7 +2,7 @@ package Algorithm::TokenBucket;
 
 use 5.006;
 
-our $VERSION = 0.3;
+our $VERSION = 0.31;
 
 use warnings;
 use strict;
@@ -106,6 +106,8 @@ sub _init {
 =item state()
 
 This method returns the state of the bucket as a list. Use it for storing purposes.
+Buckets also natively support freezing and thawing with Storable by
+providing STORABLE_* callbacks.
 
 =cut
 
@@ -113,6 +115,18 @@ sub state {
     my Algorithm::TokenBucket $self = shift;
 
     return @$self{qw/info_rate burst_size _tokens _last_check_time/};
+}
+
+use constant PACK_FORMAT => "F4";
+
+sub STORABLE_freeze {
+    my ( $self, $cloning ) = @_;
+    return pack(PACK_FORMAT(),$self->state);
+}
+
+sub STORABLE_thaw {
+    my ( $self, $cloning, $state ) = @_;
+    return $self->_init(unpack(PACK_FORMAT(),$state));
 }
 
 sub _token_flow {
@@ -181,18 +195,6 @@ sub until {
         my $needed = $size - $self->{_tokens};
         return ( $needed / $self->{info_rate} );
     }
-}
-
-use constant PACK_FORMAT => "F4";
-
-sub STORABLE_freeze {
-    my ( $self, $cloning ) = @_;
-    return pack(PACK_FORMAT(),$self->state);
-}
-
-sub STORABLE_thaw {
-    my ( $self, $cloning, $state ) = @_;
-    return $self->_init(unpack(PACK_FORMAT(),$state));
 }
 
 1;
