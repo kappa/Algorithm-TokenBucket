@@ -1,0 +1,9 @@
+^_build
+^Build$
+^blib
+~$
+\.bak$
+^MANIFEST\.SKIP$
+CVS
+^.hg
+^Algorithm-TokenBucket-
