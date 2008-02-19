@@ -1,5 +1,8 @@
 Revision history for Perl extension Algorithm::TokenBucket.
 
+0.32  Tue Feb 19 18:22:38 MSK 2008
+	- Restore 5.6 compatibility lost in 0.3.
+
 0.31  Tue Feb 19 16:04:40 MSK 2008
 	- Avoid token flow in _init() and state() to make cloning
 	  reliable. This may break code which directly
