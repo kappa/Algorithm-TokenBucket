@@ -8,6 +8,7 @@ my $build = Module::Build->new(
         'Test::NoWarnings'  => 0,
         'Time::HiRes'       => 0,
     },
+    sign        => 1,
 );
 
 $build->create_build_script;
