@@ -2,7 +2,7 @@
 use strict;
 
 use Test::NoWarnings;
-use Test::More tests => 26;
+use Test::More tests => 27;
 
 use Time::HiRes qw/sleep time/;
 
@@ -48,16 +48,18 @@ while (time - $time < 2) {
 }
 cmp_ok($traffic, '>=', 0, '50 or less in 2 seconds');
 
-$bucket = new Algorithm::TokenBucket 25/1, 4; # start afresh
+$bucket = new Algorithm::TokenBucket 25/1, 4; # start afresh (point C)
 
 my @state = $bucket->state;
 is($state[0], 25, 'state[0]');
 is($state[1], 4, 'state[1]');
+cmp_ok($state[2], '<', 0.01, 'state[2]');
 cmp_ok(abs($state[3] - time), '<', 0.1, 'state[3]');
 
 my $bucket1 = new Algorithm::TokenBucket @state;
 isa_ok($bucket1, 'Algorithm::TokenBucket');
-ok(!$bucket1->conform(1), 'restored bucket is almost empty');
+ok(!$bucket1->conform(2), 'restored bucket is almost empty'); # point D
+# if it took us long (>1/25 sec) from point C up to point D, conform(1) could be true
 sleep 0.1;
 ok($bucket1->conform(2), 'restored bucket works');
 
