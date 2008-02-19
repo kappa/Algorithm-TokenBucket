@@ -117,7 +117,7 @@ sub state {
     return @$self{qw/info_rate burst_size _tokens _last_check_time/};
 }
 
-use constant PACK_FORMAT => "F4";
+use constant PACK_FORMAT => "d4";
 
 sub STORABLE_freeze {
     my ( $self, $cloning ) = @_;
