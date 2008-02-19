@@ -251,6 +251,10 @@ Works unreliably for fractional rates unless Time::HiRes is present.
 Documentation lacks the actual algorithm description. See links or read
 the source (there are about 20 lines of sparse perl in several subs, trust me).
 
+until($N) does not return infinity if $N is greater than C<burst
+size>. Sleeping for infinity seconds is both useless and hard to
+debug.
+
 =head1 ACKNOWLEDGMENTS
 
 Yuval Kogman contributed the L</until> method, proper L<Storable> support
