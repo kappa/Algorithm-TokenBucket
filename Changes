@@ -1,5 +1,13 @@
 Revision history for Perl extension Algorithm::TokenBucket.
 
+0.31  Tue Feb 19 16:04:40 MSK 2008
+	- Avoid token flow in _init() and state() to make cloning
+	  reliable. This may break code which directly
+	  interprets state() result or messes with object's
+	  attributes. Such code deserves it.
+	- Reach 100% cond coverage.
+	- Also, use more cmp_ok's in test.pl to better diagnose cpantest FAILs.
+
 0.3  Tue Feb 19 00:53:44 MSK 2008
 	- Storable.pm support and _init() method. Patch by Yuval
 	  Kogman.
