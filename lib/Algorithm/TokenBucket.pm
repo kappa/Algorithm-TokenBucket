@@ -62,12 +62,13 @@ against a stream of items. It is also very easy to combine several
 rate-limiters in an C<AND> or C<OR> fashion.
 
 Each bucket has a memory footprint of constant size because the
-algorithm is based on statistics. This was my main motivation to
+algorithm is based on C<information rate>. This was my main motivation to
 implement it. Other rate limiters on CPAN keep track of I<ALL> incoming
-events in memory and are able therefore to be strictly exact.
+items in memory. It allows them to be precisely accurate.
 
 FYI, C<conform>, C<count>, C<information rate>, C<burst size> terms are
-shamelessly borrowed from http://linux-ip.net/gl/tcng/node62.html.
+shamelessly borrowed from http://linux-ip.net/gl/tcng/node62.html
+page.
 
 =head1 INTERFACE
 
@@ -106,7 +107,7 @@ sub _init {
 =item state()
 
 This method returns the state of the bucket as a list. Use it for storing purposes.
-Buckets also natively support freezing and thawing with Storable by
+Buckets also natively support freezing and thawing with L<Storable> by
 providing STORABLE_* callbacks.
 
 =cut
@@ -143,8 +144,8 @@ sub _token_flow {
 =item conform($)
 
 This sub checks if the bucket contains at least I<N> tokens. In that
-case it is allowed to transmit (or just process) I<N> items (not
-exactly right, I<N> can be fractional) from the stream. A bucket never
+case it is allowed to transmit (or process) I<N> items (not
+exactly right because I<N> can be fractional) from the stream. A bucket never
 conforms to an I<N> greater than C<burst size>.
 
 It returns a boolean value.
@@ -179,7 +180,7 @@ sub count {
 =item until($)
 
 This sub returns the number of seconds until I<N> tokens can be removed from the bucket.
-It's especially useful in multitasking environments like POE where you
+It's especially useful in multitasking environments like L<POE> where you
 cannot busy-wait. One can safely schedule the next conform($N) check in until($N)
 seconds instead of checking repeatedly.
 
