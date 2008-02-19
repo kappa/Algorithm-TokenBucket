@@ -20,11 +20,19 @@ ok($bucket->conform(4), '4 conforms');
 ok(!$bucket->conform(5), '5 does not conform');
 $bucket->count(1);
 ok(!$bucket->conform(4), '4 no more conforms');
-ok($bucket->conform(3), 'only 3 does');
+ok($bucket->conform(3), 'only 3 does'); # point A
 $bucket->count(1);
 $bucket->count(1);
 $bucket->count(1);
-ok(!$bucket->conform(1), 'even 1 conforms no more');
+ok(!$bucket->conform(1.1), '1.1 conforms no more'); # point B
+
+# if had (4 - $SMALLNUM) tokens in point A and it took us long to
+# reach point B due to CPU load then we could possibly end up
+# with >1 tokens in point B.
+# 
+# In this case the bucket will conform to 1 or even more.
+# I greatly reduce the probability of test failure by testing
+# conformity to 1 + 0.1 (which is a kind of huge $SMALLNUM).
 
 $bucket->count(1000);
 is($bucket->{_tokens}, 0, '-= 1000 drained bucket to 0');
