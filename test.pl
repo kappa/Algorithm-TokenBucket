@@ -2,7 +2,7 @@
 use strict;
 
 use Test::NoWarnings;
-use Test::More tests => 25;
+use Test::More tests => 26;
 
 use Time::HiRes qw/sleep time/;
 
@@ -25,6 +25,9 @@ $bucket->count(1);
 $bucket->count(1);
 $bucket->count(1);
 ok(!$bucket->conform(1), 'even 1 conforms no more');
+
+$bucket->count(1000);
+is($bucket->{_tokens}, 0, '-= 1000 drained bucket to 0');
 
 # pass 50 within 2 seconds
 my $traffic = 50;
