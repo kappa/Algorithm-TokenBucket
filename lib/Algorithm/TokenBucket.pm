@@ -100,8 +100,6 @@ sub _init {
     $self->{_last_check_time} ||= time;
     $self->{_tokens} ||= 0;
 
-    $self->_token_flow;
-
     return $self;
 }
 
@@ -113,8 +111,6 @@ This method returns the state of the bucket as a list. Use it for storing purpos
 
 sub state {
     my Algorithm::TokenBucket $self = shift;
-
-    $self->_token_flow;
 
     return @$self{qw/info_rate burst_size _tokens _last_check_time/};
 }
@@ -190,13 +186,13 @@ sub until {
 use constant PACK_FORMAT => "F4";
 
 sub STORABLE_freeze {
-	my ( $self, $cloning ) = @_;
-	return pack(PACK_FORMAT(),$self->state);
+    my ( $self, $cloning ) = @_;
+    return pack(PACK_FORMAT(),$self->state);
 }
 
 sub STORABLE_thaw {
-	my ( $self, $cloning, $state ) = @_;
-	return $self->_init(unpack(PACK_FORMAT(),$state));
+    my ( $self, $cloning, $state ) = @_;
+    return $self->_init(unpack(PACK_FORMAT(),$state));
 }
 
 1;
