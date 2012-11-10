@@ -1,4 +1,4 @@
-Algorithm::TokenBucket version 0.21
+Algorithm::TokenBucket version 0.32
 ===============================
 
 Token bucket algorithm is a flexible way of imposing a rate limit
