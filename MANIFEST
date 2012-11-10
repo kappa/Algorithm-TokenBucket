@@ -1,7 +1,6 @@
 Build.PL
 Changes
 lib/Algorithm/TokenBucket.pm
-LICENSE
 Makefile.PL
 MANIFEST
 META.json
