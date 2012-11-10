@@ -6,4 +6,7 @@
 ^MANIFEST\.SKIP$
 CVS
 ^.hg
+^.git
 ^Algorithm-TokenBucket-
+^MYMETA\.yml$
+^MYMETA\.json$

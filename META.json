@@ -1,0 +1,45 @@
+{
+   "abstract" : "Token bucket rate limiting algorithm",
+   "author" : [
+      "Alex Kapranoff, E<lt>kappa@cpan.orgE<gt>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.110440",
+   "license" : [
+      "gpl_1"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Algorithm-TokenBucket",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::NoWarnings" : 0,
+            "Time::HiRes" : 0
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.4"
+         }
+      }
+   },
+   "provides" : {
+      "Algorithm::TokenBucket" : {
+         "file" : "lib/Algorithm/TokenBucket.pm",
+         "version" : "0.32"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt"
+      ],
+      "repository" : {
+         "url" : "https://bitbucket.org/kapp/algorithm-tokenbucket"
+      }
+   },
+   "version" : "0.32"
+}

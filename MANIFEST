@@ -1,8 +1,10 @@
 Build.PL
+LICENSE
 Changes
-MANIFEST
-META.yml
-Makefile.PL
-README
 lib/Algorithm/TokenBucket.pm
+Makefile.PL
+MANIFEST
+META.json
+META.yml
+README
 test.pl

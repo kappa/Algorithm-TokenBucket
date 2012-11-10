@@ -1,15 +1,24 @@
 ---
-name: Algorithm-TokenBucket
-version: 0.32
+abstract: 'Token bucket rate limiting algorithm'
 author:
-  - 'Alex Kapranoff, E<lt>kappa@rambler-co.ruE<gt>'
-abstract: Token bucket rate limiting algorithm
-license: artistic
+  - 'Alex Kapranoff, E<lt>kappa@cpan.orgE<gt>'
 build_requires:
   Test::NoWarnings: 0
   Time::HiRes: 0
+configure_requires:
+  Module::Build: 0.4
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.110440'
+license: gpl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Algorithm-TokenBucket
 provides:
   Algorithm::TokenBucket:
     file: lib/Algorithm/TokenBucket.pm
     version: 0.32
-generated_by: Module::Build version 0.26
+resources:
+  license: http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt
+  repository: https://bitbucket.org/kapp/algorithm-tokenbucket
+version: 0.32
