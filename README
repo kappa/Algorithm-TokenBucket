@@ -22,7 +22,7 @@ To install this module type the following:
 
 COPYRIGHT AND LICENCE
 
-Licensed under GPL 3 license.
+This software is copyright (C) 2004-2012 by Alex Kapranoff.
 
-Copyright (C) 2004-2012 Alex Kapranoff <kappa@cpan.org>
-
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
