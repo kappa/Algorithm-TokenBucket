@@ -9,7 +9,7 @@ configure_requires:
   Module::Build: 0.4
 dynamic_config: 1
 generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.110440'
-license: gpl
+license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
@@ -19,6 +19,6 @@ provides:
     file: lib/Algorithm/TokenBucket.pm
     version: 0.32
 resources:
-  license: http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt
+  license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/kapp/algorithm-tokenbucket
 version: 0.32

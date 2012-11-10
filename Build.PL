@@ -2,7 +2,7 @@ use Module::Build;
 
 my $build = Module::Build->new(
     module_name => 'Algorithm::TokenBucket',
-    license     => 'gpl',
+    license     => 'perl',
     dist_version_from   => 'lib/Algorithm/TokenBucket.pm',
     build_requires      => {
         'Test::NoWarnings'  => 0,
