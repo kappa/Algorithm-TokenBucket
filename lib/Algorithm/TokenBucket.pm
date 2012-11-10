@@ -2,7 +2,7 @@ package Algorithm::TokenBucket;
 
 use 5.006;
 
-our $VERSION = 0.32;
+our $VERSION = 0.35;
 
 use warnings;
 use strict;
@@ -205,6 +205,23 @@ sub until {
     }
 }
 
+=item get_token_count()
+
+Returns the current number of tokens in the bucket. This method may be
+useful for inspection or debugging purposes. You should not examine
+the state of the bucket for rate limiting purposes.
+
+This number will frequently be fractional so it's not exactly a
+"count".
+
+=cut
+
+sub get_token_count {
+    my Algorithm::TokenBucket $self = shift;
+    $self->_token_flow;
+    return $self->{_tokens};
+}
+
 1;
 __END__
 
@@ -261,9 +278,11 @@ debug.
 Yuval Kogman contributed the L</until> method, proper L<Storable> support
 and other things.
 
+Alexey Shrub contributed the L</get_token_count> method.
+
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Alex Kapranoff.
+This software is copyright (C) 2012 by Alex Kapranoff.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

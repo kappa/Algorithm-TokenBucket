@@ -17,8 +17,8 @@ name: Algorithm-TokenBucket
 provides:
   Algorithm::TokenBucket:
     file: lib/Algorithm/TokenBucket.pm
-    version: 0.32
+    version: 0.35
 resources:
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/kapp/algorithm-tokenbucket
-version: 0.32
+version: 0.35
