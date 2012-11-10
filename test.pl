@@ -14,7 +14,10 @@ is($bucket->{info_rate}, 25, 'info_rate init');
 is($bucket->{burst_size}, 4, 'burst_size init');
 cmp_ok(abs($bucket->{_last_check_time} - time), '<', 0.1, 'check_time init');
 cmp_ok($bucket->{_tokens}, '<', 0.01, 'tokens init');
-ok($bucket->get_token_count < 0.01, '~0 tokens in new bucket');
+cmp_ok($bucket->get_token_count, '<', 0.1, '~0 tokens in new bucket');
+# get_token_count makes anoter tick so these two tests use different
+# epsilons
+
 sleep 0.3;
 ok($bucket->conform(0), '0 conforms');
 ok($bucket->conform(4), '4 conforms');
@@ -22,11 +25,11 @@ ok(!$bucket->conform(5), '5 does not conform');
 $bucket->count(1);
 ok(!$bucket->conform(4), '4 no more conforms');
 ok($bucket->conform(3), 'only 3 does'); # point A
-ok($bucket->get_token_count - 3 < 0.1, '~3 tokens indeed');
+cmp_ok($bucket->get_token_count - 3, '<', 0.1, '~3 tokens indeed');
 $bucket->count(1);
 $bucket->count(1);
 $bucket->count(1);
-ok($bucket->get_token_count < 0.1, '~0 tokens again');
+cmp_ok($bucket->get_token_count, '<', 0.1, '~0 tokens again');
 ok(!$bucket->conform(1.1), '1.1 conforms no more'); # point B
 
 # if had (4 - $SMALLNUM) tokens in point A and it took us long to
