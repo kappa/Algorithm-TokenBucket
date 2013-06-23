@@ -8,7 +8,7 @@ build_requires:
 configure_requires:
   Module::Build: 0.4
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.110440'
+generated_by: 'Module::Build version 0.4005, CPAN::Meta::Converter version 2.130880'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,8 +17,8 @@ name: Algorithm-TokenBucket
 provides:
   Algorithm::TokenBucket:
     file: lib/Algorithm/TokenBucket.pm
-    version: 0.35
+    version: 0.36
 resources:
   license: http://dev.perl.org/licenses/
   repository: https://bitbucket.org/kapp/algorithm-tokenbucket
-version: 0.35
+version: 0.36

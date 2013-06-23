@@ -4,7 +4,7 @@
       "Alex Kapranoff, E<lt>kappa@cpan.orgE<gt>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.110440",
+   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.130880",
    "license" : [
       "perl_5"
    ],
@@ -16,8 +16,8 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::NoWarnings" : 0,
-            "Time::HiRes" : 0
+            "Test::NoWarnings" : "0",
+            "Time::HiRes" : "0"
          }
       },
       "configure" : {
@@ -29,7 +29,7 @@
    "provides" : {
       "Algorithm::TokenBucket" : {
          "file" : "lib/Algorithm/TokenBucket.pm",
-         "version" : "0.35"
+         "version" : "0.36"
       }
    },
    "release_status" : "stable",
@@ -41,5 +41,5 @@
          "url" : "https://bitbucket.org/kapp/algorithm-tokenbucket"
       }
    },
-   "version" : "0.35"
+   "version" : "0.36"
 }

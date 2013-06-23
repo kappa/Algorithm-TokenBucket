@@ -1,5 +1,9 @@
 Revision history for Perl extension Algorithm::TokenBucket.
 
+0.36  Sun Jun 23 12:20:54 MSK 2013
+	- Increase some epsilons in tests to account for really slow test
+	  boxes. No functional changes.
+
 0.32  Tue Feb 19 18:22:38 MSK 2008
 	- Restore 5.6 compatibility lost in 0.3.
 
