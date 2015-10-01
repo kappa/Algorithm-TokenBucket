@@ -1,9 +1,0 @@
-Build.PL
-Changes
-lib/Algorithm/TokenBucket.pm
-Makefile.PL
-MANIFEST
-META.json
-META.yml
-README
-test.pl

@@ -1,45 +1,75 @@
 {
    "abstract" : "Token bucket rate limiting algorithm",
    "author" : [
-      "Alex Kapranoff, E<lt>kappa@cpan.orgE<gt>"
+      "Alex Kapranoff."
    ],
-   "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.130880",
+   "dynamic_config" : 0,
+   "generated_by" : "Minilla/v2.4.3, CPAN::Meta::Converter version 2.142690",
    "license" : [
-      "perl_5"
+      "gpl_3"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
    "name" : "Algorithm-TokenBucket",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "xt",
+         "inc",
+         "share",
+         "eg",
+         "examples",
+         "author",
+         "builder"
+      ]
+   },
    "prereqs" : {
-      "build" : {
-         "requires" : {
-            "Test::NoWarnings" : "0",
-            "Time::HiRes" : "0"
-         }
-      },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.4"
+            "Module::Build" : "0.4005",
+            "perl" : "5.008_001"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::CPAN::Meta" : "0",
+            "Test::MinimumVersion::Fast" : "0.04",
+            "Test::PAUSE::Permissions" : "0.04",
+            "Test::Pod" : "1.41",
+            "Test::Spellunker" : "v0.2.7"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Time::HiRes" : "0",
+            "perl" : "5.006"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0",
+            "Test::NoWarnings" : "0"
          }
       }
    },
-   "provides" : {
-      "Algorithm::TokenBucket" : {
-         "file" : "lib/Algorithm/TokenBucket.pm",
-         "version" : "0.36"
-      }
-   },
-   "release_status" : "stable",
+   "release_status" : "unstable",
    "resources" : {
-      "license" : [
-         "http://dev.perl.org/licenses/"
-      ],
+      "bugtracker" : {
+         "web" : "https://github.com/kappa/Algorithm-TokenBucket/issues"
+      },
+      "homepage" : "https://github.com/kappa/Algorithm-TokenBucket",
       "repository" : {
-         "url" : "https://bitbucket.org/kapp/algorithm-tokenbucket"
+         "type" : "git",
+         "url" : "git://github.com/kappa/Algorithm-TokenBucket.git",
+         "web" : "https://github.com/kappa/Algorithm-TokenBucket"
       }
    },
-   "version" : "0.36"
+   "version" : "0.37",
+   "x_contributors" : [
+      "kappa@aukland <kappa@aukland>",
+      "Alex Kapranoff <kappa@rambler-co.ru>",
+      "Alex Kapranoff <alex@kapranoff.ru>"
+   ]
 }
