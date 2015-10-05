@@ -54,7 +54,7 @@ Other rate limiters available on CPAN keep track of _ALL_ incoming
 items in memory. It allows them to be much more accurate.
 
 FYI, `conform`, `count`, `information rate`, `burst size` terms are
-taken from [http://linux-ip.ntaгрgl/tcng/node62.html](http://linux-ip.ntaгрgl/tcng/node62.html) page.
+taken from [http://linux-ip.net/gl/tcng/node62.html](http://linux-ip.net/gl/tcng/node62.html) page.
 
 # INTERFACE
 
@@ -175,11 +175,3 @@ http://en.wikipedia.org/wiki/Token\_bucket,
 http://linux-ip.net/gl/tcng/node54.html,
 http://linux-ip.net/gl/tcng/node62.html,
 [Schedule::RateLimit](https://metacpan.org/pod/Schedule::RateLimit), [Algorithm::FloodControl](https://metacpan.org/pod/Algorithm::FloodControl).
-
-# POD ERRORS
-
-Hey! **The above document had some coding errors, which are explained below:**
-
-- Around line 68:
-
-    Non-ASCII character seen before =encoding in 'L&lt;http://linux-ip.ntaгрgl/tcng/node62.html>'. Assuming UTF-8

@@ -2,6 +2,10 @@ Revision history for Perl extension Algorithm::TokenBucket.
 
 {{$NEXT}}
 
+0.37 2015-10-05T20:26:54Z
+	- Convert to Minilla
+	- Unconditionally depend on Time::HiRes
+
 0.36  Sun Jun 23 12:20:54 MSK 2013
 	- Increase some epsilons in tests to account for really slow test
 	  boxes. No functional changes.
