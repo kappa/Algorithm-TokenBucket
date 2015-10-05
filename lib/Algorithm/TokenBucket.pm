@@ -7,14 +7,14 @@ our $VERSION = 0.37;
 use warnings;
 use strict;
 
-use Time::HiRes;
+use Time::HiRes qw/time/;
 
 =head1 NAME
 
 Algorithm::TokenBucket - Token bucket rate limiting algorithm
 
 =head1 SYNOPSIS
-    
+
     use Algorithm::TokenBucket;
 
     # configure a bucket to limit a stream up to 100 items per hour
