@@ -65,7 +65,7 @@ Other rate limiters available on CPAN keep track of I<ALL> incoming
 items in memory. It allows them to be much more accurate.
 
 FYI, C<conform>, C<count>, C<information rate>, C<burst size> terms are
-taken from L<http://linux-ip.ntaгрgl/tcng/node62.html> page.
+taken from L<http://linux-ip.net/gl/tcng/node62.html> page.
 
 =head1 INTERFACE
 
