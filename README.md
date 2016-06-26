@@ -172,7 +172,7 @@ Alex Kapranoff, &lt;alex@kapranoff.ru&lt;gt>
 
 # SEE ALSO
 
-http://www.eecs.harvard.edu/cs143/assignments/pa1/,
+https://web.archive.org/web/20050320184218/http://www.eecs.harvard.edu/cs143/assignments/pa1/,
 http://en.wikipedia.org/wiki/Token\_bucket,
 http://linux-ip.net/gl/tcng/node54.html,
 http://linux-ip.net/gl/tcng/node62.html,
