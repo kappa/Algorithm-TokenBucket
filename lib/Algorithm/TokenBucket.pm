@@ -26,7 +26,7 @@ Algorithm::TokenBucket - Token bucket rate limiting algorithm
         sleep 0.1;
         # do things
     }
- 
+
     # process 3 items because we now can
     process(3);
 
