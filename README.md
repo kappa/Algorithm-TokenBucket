@@ -53,8 +53,10 @@ algorithm is based on `information rate`.
 Other rate limiters available on CPAN keep track of _ALL_ incoming
 items in memory. It allows them to be much more accurate.
 
-FYI, `conform`, `count`, `information rate`, `burst size` terms are
-taken from [http://linux-ip.net/gl/tcng/node62.html](http://linux-ip.net/gl/tcng/node62.html) page.
+FYI, the `conform`, `count`, `information rate`, and `burst size` terms
+are taken from the [metering primitives](http://linux-ip.net/gl/tcng/node62.html)
+page of the [Linux Traffic Control - Next Generation](http://linux-ip.net/gl/tcng/)
+system documentation.
 
 # INTERFACE
 

@@ -64,8 +64,10 @@ algorithm is based on C<information rate>.
 Other rate limiters available on CPAN keep track of I<ALL> incoming
 items in memory. It allows them to be much more accurate.
 
-FYI, C<conform>, C<count>, C<information rate>, C<burst size> terms are
-taken from L<http://linux-ip.net/gl/tcng/node62.html> page.
+FYI, the C<conform>, C<count>, C<information rate>, and C<burst size> terms
+are taken from the L<metering primitives|http://linux-ip.net/gl/tcng/node62.html>
+page of the L<Linux Traffic Control - Next Generation|http://linux-ip.net/gl/tcng/>
+system documentation.
 
 =head1 INTERFACE
 
