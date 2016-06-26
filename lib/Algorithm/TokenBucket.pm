@@ -55,14 +55,14 @@ Algorithm::TokenBucket - Token bucket rate limiting algorithm
 
 =head1 DESCRIPTION
 
-Token Bucket algorithm is a flexible way of imposing a rate limit
+The Token Bucket algorithm is a flexible way of imposing a rate limit
 against a stream of items. It is also very easy to combine several
 rate-limiters in an C<AND> or C<OR> fashion.
 
-Each bucket has a constant memory footprint because the
-algorithm is based on C<information rate>.
-Other rate limiters available on CPAN keep track of I<ALL> incoming
-items in memory. It allows them to be much more accurate.
+Each bucket has a constant memory footprint because the algorithm is based
+on the C<information rate>.  Other rate limiters available on CPAN keep
+track of I<ALL> incoming items in memory. It allows them to be much more
+accurate.
 
 FYI, the C<conform>, C<count>, C<information rate>, and C<burst size> terms
 are taken from the L<metering primitives|http://linux-ip.net/gl/tcng/node62.html>
@@ -81,10 +81,10 @@ use fields qw/info_rate burst_size _tokens _last_check_time/;
 
 =item new($$;$$)
 
-The constructor takes as parameters at least C<rate of information> in
-items per second and C<burst size> in items. It can also take current
-token counter and last check time but this usage is mostly intended for
-restoring a saved bucket. See L</state>.
+The constructor requires at least the C<rate of information> in items per
+second and the C<burst size> in items as its input parameters. It can also
+take the current token counter and last check time but this usage is mostly
+intended for restoring a saved bucket. See L</state>.
 
 =cut
 
@@ -105,9 +105,9 @@ sub _init {
 
 =item state()
 
-This method returns the state of the bucket as a list. Use it for storing purposes.
+Returns the state of the bucket as a list. Use it for storing purposes.
 Buckets also natively support freezing and thawing with L<Storable> by
-providing STORABLE_* callbacks.
+providing C<STORABLE_*> callbacks.
 
 =cut
 
@@ -142,12 +142,10 @@ sub _token_flow {
 
 =item conform($)
 
-This method checks if the bucket contains at least I<N> tokens. In that
-case it is allowed to transmit or process I<N> items (not
-exactly right because I<N> can be fractional) from the stream. A bucket never
-conforms to an I<N> greater than C<burst size>.
-
-The method returns a boolean value.
+This method returns true if the bucket contains at least I<N> tokens and
+false otherwise. In the case that it is true, it is allowed to transmit or
+process I<N> items (not exactly right because I<N> can be fractional) from
+the stream. A bucket never conforms to an I<N> greater than C<burst size>.
 
 =cut
 
@@ -162,8 +160,8 @@ sub conform {
 
 =item count($)
 
-This method removes I<N> (or all if there are less than I<N> available) tokens from the bucket.
-Does not return a meaningful value.
+This method removes I<N> (or all if there are fewer than I<N> available)
+tokens from the bucket.  It does not return a meaningful value.
 
 =cut
 
@@ -178,13 +176,14 @@ sub count {
 
 =item until($)
 
-This method returns the number of seconds until I<N> tokens can be removed from the bucket.
-It is especially useful in multitasking environments like L<POE> where you
-cannot busy-wait. One can safely schedule the next conform($N) check in until($N)
-seconds instead of checking repeatedly.
+This method returns the number of seconds until I<N> tokens can be removed
+from the bucket.  It is especially useful in multitasking environments like
+L<POE> where you cannot busy-wait. One can safely schedule the next
+C<< conform($N) >> check in C<< until($N) >> seconds instead of checking
+repeatedly.
 
-Note that until() does not take into account C<burst size>. This means
-that a bucket will not conform to I<N> even after sleeping for until($N)
+Note that C<until()> does not take into account C<burst size>. This means
+that a bucket will not conform to I<N> even after sleeping for C<< until($N) >>
 seconds if I<N> is greater than C<burst size>.
 
 =cut
@@ -246,7 +245,7 @@ allow 2 mails per minute but no more than 20 mails per hour.
     }
 
 Now, let's fix the CPU-hogging example from L</SYNOPSIS> using
-L</until()> method.
+the L</until()> method.
 
     my $bucket = new Algorithm::TokenBucket 100 / 3600, 5;
     my $time = Time::HiRes::time;
@@ -265,9 +264,8 @@ L</until()> method.
 Documentation lacks the actual algorithm description. See links or read
 the source (there are about 20 lines of sparse perl in several subs).
 
-until($N) does not return infinity if $N is greater than C<burst
-size>. Sleeping for infinity seconds is both useless and hard to
-debug.
+C<until($N)> does not return infinity if C<$N> is greater than C<burst
+size>. Sleeping for infinity seconds is both useless and hard to debug.
 
 =head1 ACKNOWLEDGMENTS
 
