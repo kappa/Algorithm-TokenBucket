@@ -67,7 +67,7 @@ system documentation.
     The constructor requires at least the `rate of information` in items per
     second and the `burst size` in items as its input parameters. It can also
     take the current token counter and last check time but this usage is mostly
-    intended for restoring a saved bucket. See ["state"](#state).
+    intended for restoring a saved bucket. See ["state()"](#state).
 
 - state()
 
@@ -128,7 +128,7 @@ allow 2 mails per minute but no more than 20 mails per hour.
     }
 
 Now, let's fix the CPU-hogging example from ["SYNOPSIS"](#synopsis) using
-the ["until()"](#until) method.
+the ["until($)"](#until) method.
 
     my $bucket = new Algorithm::TokenBucket 100 / 3600, 5;
     my $time = Time::HiRes::time;
@@ -152,10 +152,10 @@ size`. Sleeping for infinity seconds is both useless and hard to debug.
 
 # ACKNOWLEDGMENTS
 
-Yuval Kogman contributed the ["until"](#until) method, proper [Storable](https://metacpan.org/pod/Storable) support
+Yuval Kogman contributed the ["until($)"](#until) method, proper [Storable](https://metacpan.org/pod/Storable) support
 and other things.
 
-Alexey Shrub contributed the ["get\_token\_count"](#get_token_count) method.
+Alexey Shrub contributed the ["get\_token\_count()"](#get_token_count) method.
 
 # COPYRIGHT AND LICENSE
 

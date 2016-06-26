@@ -84,7 +84,7 @@ use fields qw/info_rate burst_size _tokens _last_check_time/;
 The constructor requires at least the C<rate of information> in items per
 second and the C<burst size> in items as its input parameters. It can also
 take the current token counter and last check time but this usage is mostly
-intended for restoring a saved bucket. See L</state>.
+intended for restoring a saved bucket. See L</state()>.
 
 =cut
 
@@ -245,7 +245,7 @@ allow 2 mails per minute but no more than 20 mails per hour.
     }
 
 Now, let's fix the CPU-hogging example from L</SYNOPSIS> using
-the L</until()> method.
+the L</until($)> method.
 
     my $bucket = new Algorithm::TokenBucket 100 / 3600, 5;
     my $time = Time::HiRes::time;
@@ -269,10 +269,10 @@ size>. Sleeping for infinity seconds is both useless and hard to debug.
 
 =head1 ACKNOWLEDGMENTS
 
-Yuval Kogman contributed the L</until> method, proper L<Storable> support
+Yuval Kogman contributed the L</until($)> method, proper L<Storable> support
 and other things.
 
-Alexey Shrub contributed the L</get_token_count> method.
+Alexey Shrub contributed the L</get_token_count()> method.
 
 =head1 COPYRIGHT AND LICENSE
 
