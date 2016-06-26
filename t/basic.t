@@ -8,7 +8,7 @@ use Time::HiRes qw/sleep time/;
 
 BEGIN { use_ok('Algorithm::TokenBucket'); }
 
-my $bucket = new Algorithm::TokenBucket 25/1, 4;
+my $bucket = Algorithm::TokenBucket->new(25/1, 4);
 isa_ok($bucket, 'Algorithm::TokenBucket');
 is($bucket->{info_rate}, 25, 'info_rate init');
 is($bucket->{burst_size}, 4, 'burst_size init');
@@ -54,7 +54,7 @@ while (time - $time < 2) {
 }
 cmp_ok($traffic, '>=', 0, '50 or less in 2 seconds');
 
-$bucket = new Algorithm::TokenBucket 25/1, 4; # start afresh (point C)
+$bucket = Algorithm::TokenBucket->new(25/1, 4); # start afresh (point C)
 
 my @state = $bucket->state;
 is($state[0], 25, 'state[0]');
@@ -62,7 +62,7 @@ is($state[1], 4, 'state[1]');
 cmp_ok($state[2], '<', 0.01, 'state[2]');
 cmp_ok(abs($state[3] - time), '<', 0.1, 'state[3]');
 
-my $bucket1 = new Algorithm::TokenBucket @state;
+my $bucket1 = Algorithm::TokenBucket->new(@state);
 isa_ok($bucket1, 'Algorithm::TokenBucket');
 ok(!$bucket1->conform(2), 'restored bucket is almost empty'); # point D
 # if it took us long (>1/25 sec) from point C up to point D, conform(1) could be true
