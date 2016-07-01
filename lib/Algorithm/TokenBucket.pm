@@ -5,7 +5,7 @@ use 5.006;
 use warnings;
 use strict;
 
-our $VERSION = 0.38;
+our $VERSION = 0.37;
 
 use Time::HiRes qw/time/;
 
@@ -60,8 +60,9 @@ against a stream of items. It is also very easy to combine several
 rate-limiters in an C<AND> or C<OR> fashion.
 
 Each bucket has a constant memory footprint because the algorithm is based
-on the C<information rate>. Other rate limiters may keep track of
-I<ALL> incoming items in memory. It allows them to be more accurate.
+on the C<information rate>.  Other rate limiters available on CPAN keep
+track of I<ALL> incoming items in memory. It allows them to be much more
+accurate.
 
 FYI, the C<conform>, C<count>, C<information rate>, and C<burst size> terms
 are taken from the L<metering primitives|http://linux-ip.net/gl/tcng/node62.html>
@@ -164,7 +165,7 @@ sub conform {
 =item count($)
 
 This method removes I<N> (or all if there are fewer than I<N> available)
-tokens from the bucket. It does not return a meaningful value.
+tokens from the bucket.  It does not return a meaningful value.
 
 =cut
 
@@ -180,7 +181,7 @@ sub count {
 =item until($)
 
 This method returns the number of seconds until I<N> tokens can be removed
-from the bucket. It is especially useful in multitasking environments like
+from the bucket.  It is especially useful in multitasking environments like
 L<POE> where you cannot busy-wait. One can safely schedule the next
 C<< conform($N) >> check in C<< until($N) >> seconds instead of checking
 repeatedly.
@@ -265,7 +266,7 @@ the L</until($)> method.
 =head1 BUGS
 
 Documentation lacks the actual algorithm description. See links or read
-the source (there are about 20 lines of sparse Perl in several subs).
+the source (there are about 20 lines of sparse perl in several subs).
 
 C<until($N)> does not return infinity if C<$N> is greater than C<burst
 size>. Sleeping for infinity seconds is both useless and hard to debug.
@@ -277,18 +278,16 @@ and other things.
 
 Alexey Shrub contributed the L</get_token_count()> method.
 
-Paul Cochrane contributed various documentation and infrastructure fixes.
-
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (C) 2016 by Alex Kapranoff.
+This software is copyright (C) 2015 by Alex Kapranoff.
 
 This is free software; you can redistribute it and/or modify it under
 the terms GNU General Public License version 3.
 
 =head1 AUTHOR
 
-Alex Kapranoff, E<lt>alex@kapranoff.ruE<gt>
+Alex Kapranoff, E<lt>alex@kapranoff.ru<gt>
 
 =head1 SEE ALSO
 
@@ -305,8 +304,6 @@ Alex Kapranoff, E<lt>alex@kapranoff.ruE<gt>
 =item L<Schedule::RateLimit>
 
 =item L<Algorithm::FloodControl>
-
-=item L<Object::RateLimiter>
 
 =back
 
