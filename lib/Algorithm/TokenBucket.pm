@@ -1,6 +1,6 @@
 package Algorithm::TokenBucket;
 
-use 5.006;
+use 5.008;
 
 use warnings;
 use strict;
