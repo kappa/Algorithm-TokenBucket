@@ -15,7 +15,7 @@ Algorithm::TokenBucket - Token bucket rate limiting algorithm
            sleep 0.1;
            # do things
        }
-    
+
        # process 3 items because we now can
        process(3);
 
@@ -44,17 +44,19 @@ Algorithm::TokenBucket - Token bucket rate limiting algorithm
 
 # DESCRIPTION
 
-Token Bucket algorithm is a flexible way of imposing a rate limit
+The Token Bucket algorithm is a flexible way of imposing a rate limit
 against a stream of items. It is also very easy to combine several
 rate-limiters in an `AND` or `OR` fashion.
 
-Each bucket has a constant memory footprint because the
-algorithm is based on `information rate`.
-Other rate limiters available on CPAN keep track of _ALL_ incoming
-items in memory. It allows them to be much more accurate.
+Each bucket has a constant memory footprint because the algorithm is based
+on the `information rate`.  Other rate limiters available on CPAN keep
+track of _ALL_ incoming items in memory. It allows them to be much more
+accurate.
 
-FYI, `conform`, `count`, `information rate`, `burst size` terms are
-taken from [http://linux-ip.net/gl/tcng/node62.html](http://linux-ip.net/gl/tcng/node62.html) page.
+FYI, the `conform`, `count`, `information rate`, and `burst size` terms
+are taken from the [metering primitives](http://linux-ip.net/gl/tcng/node62.html)
+page of the [Linux Traffic Control - Next Generation](http://linux-ip.net/gl/tcng/)
+system documentation.
 
 # INTERFACE
 
@@ -62,40 +64,39 @@ taken from [http://linux-ip.net/gl/tcng/node62.html](http://linux-ip.net/gl/tcng
 
 - new($$;$$)
 
-    The constructor takes as parameters at least `rate of information` in
-    items per second and `burst size` in items. It can also take current
-    token counter and last check time but this usage is mostly intended for
-    restoring a saved bucket. See ["state"](#state).
+    The constructor requires at least the `rate of information` in items per
+    second and the `burst size` in items as its input parameters. It can also
+    take the current token counter and last check time but this usage is mostly
+    intended for restoring a saved bucket. See ["state()"](#state).
 
 - state()
 
-    This method returns the state of the bucket as a list. Use it for storing purposes.
+    Returns the state of the bucket as a list. Use it for storing purposes.
     Buckets also natively support freezing and thawing with [Storable](https://metacpan.org/pod/Storable) by
-    providing STORABLE\_\* callbacks.
+    providing `STORABLE_*` callbacks.
 
 - conform($)
 
-    This method checks if the bucket contains at least _N_ tokens. In that
-    case it is allowed to transmit or process _N_ items (not
-    exactly right because _N_ can be fractional) from the stream. A bucket never
-    conforms to an _N_ greater than `burst size`.
-
-    The method returns a boolean value.
+    This method returns true if the bucket contains at least _N_ tokens and
+    false otherwise. In the case that it is true, it is allowed to transmit or
+    process _N_ items (not exactly right because _N_ can be fractional) from
+    the stream. A bucket never conforms to an _N_ greater than `burst size`.
 
 - count($)
 
-    This method removes _N_ (or all if there are less than _N_ available) tokens from the bucket.
-    Does not return a meaningful value.
+    This method removes _N_ (or all if there are fewer than _N_ available)
+    tokens from the bucket.  It does not return a meaningful value.
 
 - until($)
 
-    This method returns the number of seconds until _N_ tokens can be removed from the bucket.
-    It is especially useful in multitasking environments like [POE](https://metacpan.org/pod/POE) where you
-    cannot busy-wait. One can safely schedule the next conform($N) check in until($N)
-    seconds instead of checking repeatedly.
+    This method returns the number of seconds until _N_ tokens can be removed
+    from the bucket.  It is especially useful in multitasking environments like
+    [POE](https://metacpan.org/pod/POE) where you cannot busy-wait. One can safely schedule the next
+    `conform($N)` check in `until($N)` seconds instead of checking
+    repeatedly.
 
-    Note that until() does not take into account `burst size`. This means
-    that a bucket will not conform to _N_ even after sleeping for until($N)
+    Note that `until()` does not take into account `burst size`. This means
+    that a bucket will not conform to _N_ even after sleeping for `until($N)`
     seconds if _N_ is greater than `burst size`.
 
 - get\_token\_count()
@@ -127,7 +128,7 @@ allow 2 mails per minute but no more than 20 mails per hour.
     }
 
 Now, let's fix the CPU-hogging example from ["SYNOPSIS"](#synopsis) using
-["until()"](#until) method.
+the ["until($)"](#until) method.
 
     my $bucket = new Algorithm::TokenBucket 100 / 3600, 5;
     my $time = Time::HiRes::time;
@@ -146,16 +147,15 @@ Now, let's fix the CPU-hogging example from ["SYNOPSIS"](#synopsis) using
 Documentation lacks the actual algorithm description. See links or read
 the source (there are about 20 lines of sparse perl in several subs).
 
-until($N) does not return infinity if $N is greater than `burst
-size`. Sleeping for infinity seconds is both useless and hard to
-debug.
+`until($N)` does not return infinity if `$N` is greater than `burst
+size`. Sleeping for infinity seconds is both useless and hard to debug.
 
 # ACKNOWLEDGMENTS
 
-Yuval Kogman contributed the ["until"](#until) method, proper [Storable](https://metacpan.org/pod/Storable) support
+Yuval Kogman contributed the ["until($)"](#until) method, proper [Storable](https://metacpan.org/pod/Storable) support
 and other things.
 
-Alexey Shrub contributed the ["get\_token\_count"](#get_token_count) method.
+Alexey Shrub contributed the ["get\_token\_count()"](#get_token_count) method.
 
 # COPYRIGHT AND LICENSE
 
@@ -170,8 +170,9 @@ Alex Kapranoff, &lt;alex@kapranoff.ru&lt;gt>
 
 # SEE ALSO
 
-http://www.eecs.harvard.edu/cs143/assignments/pa1/,
-http://en.wikipedia.org/wiki/Token\_bucket,
-http://linux-ip.net/gl/tcng/node54.html,
-http://linux-ip.net/gl/tcng/node62.html,
-[Schedule::RateLimit](https://metacpan.org/pod/Schedule::RateLimit), [Algorithm::FloodControl](https://metacpan.org/pod/Algorithm::FloodControl).
+- https://web.archive.org/web/20050320184218/http://www.eecs.harvard.edu/cs143/assignments/pa1/
+- http://en.wikipedia.org/wiki/Token\_bucket
+- http://linux-ip.net/gl/tcng/node54.html
+- http://linux-ip.net/gl/tcng/node62.html
+- [Schedule::RateLimit](https://metacpan.org/pod/Schedule::RateLimit)
+- [Algorithm::FloodControl](https://metacpan.org/pod/Algorithm::FloodControl)
