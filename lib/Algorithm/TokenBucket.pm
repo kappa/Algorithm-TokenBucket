@@ -2,10 +2,10 @@ package Algorithm::TokenBucket;
 
 use 5.006;
 
-our $VERSION = 0.37;
-
 use warnings;
 use strict;
+
+our $VERSION = 0.37;
 
 use Time::HiRes qw/time/;
 
