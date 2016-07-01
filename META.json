@@ -4,7 +4,7 @@
       "Alex Kapranoff."
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v2.5.0, CPAN::Meta::Converter version 2.142690",
+   "generated_by" : "Minilla/v3.0.2, CPAN::Meta::Converter version 2.150005",
    "license" : [
       "gpl_3"
    ],
@@ -28,7 +28,8 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38",
+            "Module::Build" : "0",
+            "Module::Build::Tiny" : "0.035",
             "perl" : "5.008_001"
          }
       },
@@ -66,10 +67,13 @@
          "web" : "https://github.com/kappa/Algorithm-TokenBucket"
       }
    },
-   "version" : "0.37",
+   "version" : "0.38",
    "x_contributors" : [
       "kappa@aukland <kappa@aukland>",
       "Alex Kapranoff <kappa@rambler-co.ru>",
+      "Paul Cochrane <paul@liekut.de>",
+      "Alex Kapranoff <kappa@yandex.ru>",
       "Alex Kapranoff <alex@kapranoff.ru>"
-   ]
+   ],
+   "x_serialization_backend" : "JSON::PP version 2.27300"
 }

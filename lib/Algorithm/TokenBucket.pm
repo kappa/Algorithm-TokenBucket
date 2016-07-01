@@ -5,7 +5,7 @@ use 5.008;
 use warnings;
 use strict;
 
-our $VERSION = 0.37;
+our $VERSION = 0.38;
 
 use Time::HiRes qw/time/;
 

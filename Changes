@@ -1,6 +1,7 @@
 Revision history for Perl extension Algorithm::TokenBucket.
 
 {{$NEXT}}
+    - Various style fixes, mostly documentation.
 
 0.37 2015-10-05T20:26:54Z
 	- Convert to Minilla

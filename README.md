@@ -4,43 +4,43 @@ Algorithm::TokenBucket - Token bucket rate limiting algorithm
 
 # SYNOPSIS
 
-       use Algorithm::TokenBucket;
+    use Algorithm::TokenBucket;
 
-       # configure a bucket to limit a stream up to 100 items per hour
-       # with bursts of 5 items max
-       my $bucket = Algorithm::TokenBucket->new(100 / 3600, 5);
+    # configure a bucket to limit a stream up to 100 items per hour
+    # with bursts of 5 items max
+    my $bucket = Algorithm::TokenBucket->new(100 / 3600, 5);
 
-       # wait until we are allowed to process 3 items
-       until ($bucket->conform(3)) {
-           sleep 0.1;
-           # do things
-       }
+    # wait until we are allowed to process 3 items
+    until ($bucket->conform(3)) {
+        sleep 0.1;
+        # do things
+    }
 
-       # process 3 items because we now can
-       process(3);
+    # process 3 items because we now can
+    process(3);
 
-       # leak (flush) bucket
-       $bucket->count(3);  # same as $bucket->count(1) for 1..3;
+    # leak (flush) bucket
+    $bucket->count(3);  # same as $bucket->count(1) for 1..3;
 
-       if ($bucket->conform(10)) {
-           die;
-           # because a bucket with the burst size of 5
-           # will never conform to 10
-       }
+    if ($bucket->conform(10)) {
+        die;
+        # because a bucket with the burst size of 5
+        # will never conform to 10
+    }
 
-       my $time = Time::HiRes::time;
-       while (Time::HiRes::time - $time < 7200) {  # two hours
-           # be bursty
-           if ($bucket->conform(5)) {
-               process(5);
-               $bucket->count(5);
-           }
-       }
-       # we're likely to have processed 200 items (and hogged CPU)
+    my $time = Time::HiRes::time;
+    while (Time::HiRes::time - $time < 7200) {  # two hours
+        # be bursty
+        if ($bucket->conform(5)) {
+            process(5);
+            $bucket->count(5);
+        }
+    }
+    # we're likely to have processed 200 items (and hogged CPU)
 
-       Storable::store $bucket, 'bucket.stored';
-       my $bucket1 =
-         Algorithm::TokenBucket->new( @{ Storable::retrieve('bucket.stored') } );
+    Storable::store $bucket, 'bucket.stored';
+    my $bucket1 =
+        Algorithm::TokenBucket->new(@{Storable::retrieve('bucket.stored')});
 
 # DESCRIPTION
 
@@ -49,9 +49,8 @@ against a stream of items. It is also very easy to combine several
 rate-limiters in an `AND` or `OR` fashion.
 
 Each bucket has a constant memory footprint because the algorithm is based
-on the `information rate`.  Other rate limiters available on CPAN keep
-track of _ALL_ incoming items in memory. It allows them to be much more
-accurate.
+on the `information rate`. Other rate limiters may keep track of
+_ALL_ incoming items in memory. It allows them to be more accurate.
 
 FYI, the `conform`, `count`, `information rate`, and `burst size` terms
 are taken from the [metering primitives](http://linux-ip.net/gl/tcng/node62.html)
@@ -85,12 +84,12 @@ system documentation.
 - count($)
 
     This method removes _N_ (or all if there are fewer than _N_ available)
-    tokens from the bucket.  It does not return a meaningful value.
+    tokens from the bucket. It does not return a meaningful value.
 
 - until($)
 
     This method returns the number of seconds until _N_ tokens can be removed
-    from the bucket.  It is especially useful in multitasking environments like
+    from the bucket. It is especially useful in multitasking environments like
     [POE](https://metacpan.org/pod/POE) where you cannot busy-wait. One can safely schedule the next
     `conform($N)` check in `until($N)` seconds instead of checking
     repeatedly.
@@ -145,7 +144,7 @@ the ["until($)"](#until) method.
 # BUGS
 
 Documentation lacks the actual algorithm description. See links or read
-the source (there are about 20 lines of sparse perl in several subs).
+the source (there are about 20 lines of sparse Perl in several subs).
 
 `until($N)` does not return infinity if `$N` is greater than `burst
 size`. Sleeping for infinity seconds is both useless and hard to debug.
@@ -157,16 +156,18 @@ and other things.
 
 Alexey Shrub contributed the ["get\_token\_count()"](#get_token_count) method.
 
+Paul Cochrane contributed various documentation and infrastructure fixes.
+
 # COPYRIGHT AND LICENSE
 
-This software is copyright (C) 2015 by Alex Kapranoff.
+This software is copyright (C) 2016 by Alex Kapranoff.
 
 This is free software; you can redistribute it and/or modify it under
 the terms GNU General Public License version 3.
 
 # AUTHOR
 
-Alex Kapranoff, &lt;alex@kapranoff.ru&lt;gt>
+Alex Kapranoff, &lt;alex@kapranoff.ru>
 
 # SEE ALSO
 
@@ -176,3 +177,4 @@ Alex Kapranoff, &lt;alex@kapranoff.ru&lt;gt>
 - http://linux-ip.net/gl/tcng/node62.html
 - [Schedule::RateLimit](https://metacpan.org/pod/Schedule::RateLimit)
 - [Algorithm::FloodControl](https://metacpan.org/pod/Algorithm::FloodControl)
+- [Object::RateLimiter](https://metacpan.org/pod/Object::RateLimiter)
