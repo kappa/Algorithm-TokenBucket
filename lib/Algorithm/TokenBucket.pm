@@ -19,7 +19,7 @@ Algorithm::TokenBucket - Token bucket rate limiting algorithm
 
     # configure a bucket to limit a stream up to 100 items per hour
     # with bursts of 5 items max
-    my $bucket = new Algorithm::TokenBucket 100 / 3600, 5;
+    my $bucket = Algorithm::TokenBucket->new(100 / 3600, 5);
 
     # wait until we are allowed to process 3 items
     until ($bucket->conform(3)) {
@@ -50,8 +50,8 @@ Algorithm::TokenBucket - Token bucket rate limiting algorithm
     # we're likely to have processed 200 items (and hogged CPU)
 
     Storable::store $bucket, 'bucket.stored';
-    my $bucket1 = new Algorithm::TokenBucket
-            @{Storable::retrieve('bucket.stored')};
+    my $bucket1 =
+      Algorithm::TokenBucket->new( @{ Storable::retrieve('bucket.stored') } );
 
 =head1 DESCRIPTION
 
@@ -230,8 +230,8 @@ __END__
 Imagine a rate limiter for a mail sending application. We would like to
 allow 2 mails per minute but no more than 20 mails per hour.
 
-    my $rl1 = new Algorithm::TokenBucket 2/60, 1;
-    my $rl2 = new Algorithm::TokenBucket 20/3600, 10;
+    my $rl1 = Algorithm::TokenBucket->new(2/60, 1);
+    my $rl2 = Algorithm::TokenBucket->new(20/3600, 10);
         # "bursts" of 10 to ease the lag but $rl1 enforces
         # 2 per minute, so it won't flood
 
@@ -247,7 +247,7 @@ allow 2 mails per minute but no more than 20 mails per hour.
 Now, let's fix the CPU-hogging example from L</SYNOPSIS> using
 the L</until($)> method.
 
-    my $bucket = new Algorithm::TokenBucket 100 / 3600, 5;
+    my $bucket = Algorithm::TokenBucket->new(100 / 3600, 5);
     my $time = Time::HiRes::time;
     while (Time::HiRes::time - $time < 7200) {  # two hours
         # be bursty
