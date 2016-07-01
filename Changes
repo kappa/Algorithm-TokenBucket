@@ -1,6 +1,8 @@
 Revision history for Perl extension Algorithm::TokenBucket.
 
 {{$NEXT}}
+
+0.38 2016-07-01T08:51:35Z
     - Various style fixes, mostly documentation.
 
 0.37 2015-10-05T20:26:54Z
